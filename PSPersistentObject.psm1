@@ -1,10 +1,10 @@
 function New-PSPersistentObject {
 <#
  .Synopsis
-  Converts an object to a base64 string and optionally saves it to a local SQLite database
+  Converts an object to a base64 string and saves it to a local SQLite database
 
  .Description
-  Converts an object to a base64 string and optionally saves it to a local SQLite database
+  Converts an object to a base64 string and saves it to a local SQLite database
 
  .Parameter Object
   The object that should be saved in persistent storage
