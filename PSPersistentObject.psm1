@@ -343,9 +343,62 @@ function Get-PersistentObject {
 }
 
 
+function Remove-PersistentObject {
+    <#
+ .Synopsis
+  Remove a previously saved object from the database
+
+ .Description
+  Remove a previously saved object from the database
+
+ .Parameter id
+  Identifier for the object
+ 
+ .Example
+   # Remove the object with Id 1
+   Remove-PersistentObject -Id 1 
+
+#>
+    param(
+        [Parameter(Position=0,
+                   Mandatory = $true,
+                   ValueFromPipeline = $false)]
+                   [String]$Id
+    )
+
+    Begin {
+
+
+
+        if(-not $Id){
+            write-error "Id must be specified"
+            break  
+     }
+
+    }
+    
+     Process {
+    
+      
+        $query = "delete from objects where id = '$id'"
+        $connection = New-DBConnection
+       Invoke-DBNonQuery -connection $connection -query "$Query"
+    
+  
+    }
+    
+     End {
+    
+        Close-DBConnection $connection
+       
+    
+     }
+ 
+}
+
+
 PrepareDB
 
 #Export-ModuleMember -Function New-PersistentObject
-#Export-ModuleMember -Function Save-PersistentObject
 #Export-ModuleMember -Function Get-PersistentObject
 #Export-ModuleMember -Function Remove-PersistentObject
